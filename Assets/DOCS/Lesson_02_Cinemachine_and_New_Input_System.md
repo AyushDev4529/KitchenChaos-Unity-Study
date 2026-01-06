@@ -16,7 +16,7 @@
         //Input Script
         return input; // not normalized
     }
-}
+}```
 - Step 1 : In unity 6 enable both Input manager in *Project setting -> player -> Other -> Active Input Handling.*
 - Step 2 : Create Input Actions in Project Assets window, Double click to open it.
 - Step 3 : In this input Action there are three Columns.
