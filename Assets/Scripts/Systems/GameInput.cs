@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TODO : New Input Actions for Interaction
 public class GameInput : MonoBehaviour
 {
     PlayerInputActions inputActions;

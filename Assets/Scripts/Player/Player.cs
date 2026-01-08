@@ -3,19 +3,24 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //TODO : to be moved to separate player Interaction Script with IInteractable interface
+    //TODO : to be moved to separate player Movement Script
+    //TODO : Using new Input System for Interaction 
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotationSpeed = 5f;
     [SerializeField] GameInput gameInput;
     [SerializeField] CharacterController characterController;
+    [SerializeField] LayerMask interactableLayerMask;
 
     Vector3 movementVector;
     bool isWalking = false;
     float verticalVelocity;
+    Vector3 lastInteractDirection;
 
     private void Update()
     {
         HandleMovement();
+        HandleInteraction();
     }
 
     // Handle Movement Logic 
@@ -80,4 +85,31 @@ public class Player : MonoBehaviour
     {
         return isWalking;
     }
+
+
+    //Handle Interaction Logic
+    private void HandleInteraction()
+    {
+        float raycastDistance = 2f;
+        Vector3 interactionDirection = MovementDirection();
+
+
+        if (interactionDirection != Vector3.zero)
+            lastInteractDirection = interactionDirection;
+
+
+        // Perform raycast to detect interactable objects in front of the player
+        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit hitInfo, raycastDistance, interactableLayerMask))
+        {
+            Debug.Log("Hit: " + hitInfo.collider.name);
+            if (hitInfo.transform.TryGetComponent(out ClearCounter clearCounter)) 
+                    clearCounter.Interact();
+         }
+        else
+        {
+            Debug.Log("No interactable object in front of the player.");
+        }
+
+    }
+
 }

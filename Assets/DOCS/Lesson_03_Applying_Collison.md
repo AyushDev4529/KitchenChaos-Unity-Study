@@ -16,7 +16,7 @@
 - Now to make character move diagonally even when Colliding with box we use if else block to check if player can't move then try moving in X axis, else Try moving in Z axis.
 - To move in specified direction we only take only specified axis input and store in our `movementDirection` ex . for X axis `Vector3 movementDirectionX = new Vector3(MovementDirection().x, 0, 0)`.
 
-> **NOTE : ** ==We will later add Character Controller ==because current *Manual collision resolution* 
+> **NOTE : We will later add Character Controller because current *Manual collision resolution* 
 	 *Your current logic will fail when:
 	- touching two colliders at once
 	- moving diagonally into corners
