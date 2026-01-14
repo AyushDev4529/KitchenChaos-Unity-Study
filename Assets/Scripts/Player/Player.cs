@@ -60,7 +60,6 @@ public class Player : MonoBehaviour
         // Perform raycast to detect interactable objects in front of the player
         if (Physics.Raycast(raycastOrigin, raycastDirection, out RaycastHit hitInfo, raycastDistance, interactableLayerMask))
         {
-            Debug.Log("Hit: " + hitInfo.collider.name);
             if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
             {         
                 if (hitInfo.transform.TryGetComponent(out ClearCounter clearCounter))
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("No interactable object in front of the player.");
             SetSelectedCounter(null);
         }
 

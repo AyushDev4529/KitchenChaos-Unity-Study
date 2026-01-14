@@ -4,32 +4,66 @@ using UnityEngine;
 public class ClearCounter : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject counterTop;
+    [SerializeField] private ClearCounter SecondCounter;
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     private KitchenObject kitchenObject;
+
+
+    [SerializeField] private bool IsTesting;
     public void Interact(GameObject interactor)
     {
-        if (kitchenObject == null)
+        SpawnKitchenObject();
+    }
+
+    private void Update()
+    {
+        if (IsTesting && Input.GetKeyDown(KeyCode.T))
         {
-            SpawnKitchenObject();
+            if (kitchenObject != null)
+            {
+                kitchenObject.SetClearCounter(SecondCounter);
+            }
         }
-        else
-        {
-            Debug.Log("Counter already has an object.");
-        }
+
     }
 
     private void SpawnKitchenObject()
     {
-        GameObject kitchenObjectInstance = Instantiate(kitchenObjectSO.prefab, counterTop.transform);
 
-        // Get the KitchenObject component from the instantiated prefab and set its position
-        kitchenObject = kitchenObjectInstance.GetComponent<KitchenObject>();
+        if (kitchenObject == null)
+        {
+            GameObject kitchenObjectInstance = Instantiate(kitchenObjectSO.prefab, counterTop.transform);
+            // Set the local position to zero to align it with the counter top
+            kitchenObjectInstance.GetComponent<KitchenObject>().SetClearCounter(this);
 
-        // Ensure the kitchen object is positioned correctly on the counter
-        if (kitchenObject != null)
-            kitchenObject.transform.localPosition = Vector3.zero;
+        }
         else
-            Debug.LogError("KitchenObject component not found on the instantiated prefab.");
+        {
+            Debug.Log(kitchenObject.GetClearCounter());
+        }
+    }
 
+    public GameObject GetKitchenObjectFollowNewCounter()
+    {
+        return counterTop;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
+    }
+    public void ClearKitchenObject()
+    {
+        kitchenObject = null;
     }
 }

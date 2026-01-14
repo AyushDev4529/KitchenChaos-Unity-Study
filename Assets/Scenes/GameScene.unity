@@ -208,6 +208,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
+      propertyPath: IsTesting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
+      propertyPath: SecondCounter
+      value: 
+      objectReference: {fileID: 1601816328}
+    - target: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
       propertyPath: kitchenObjectSO
       value: 
       objectReference: {fileID: 11400000, guid: d1ccb462604ca4845859c1b72f643891, type: 2}
@@ -1102,6 +1110,17 @@ Transform:
   - {fileID: 110677542}
   m_Father: {fileID: 1651176690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1220057000 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
+  m_PrefabInstance: {fileID: 132694577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a678d7624127889479404e3b991c8f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1253760494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,6 +1307,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1253760495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1601816328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
+  m_PrefabInstance: {fileID: 5174474829134955898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a678d7624127889479404e3b991c8f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1651176689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,6 +1446,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
+      propertyPath: SecondCounter
+      value: 
+      objectReference: {fileID: 1220057000}
     - target: {fileID: 9113399270537732901, guid: f17f75ab4651bfa4392d859478ebfe17, type: 3}
       propertyPath: kitchenObjectSO
       value: 
