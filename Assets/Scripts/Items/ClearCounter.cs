@@ -1,51 +1,52 @@
 using System;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour, IInteractable
+public class ClearCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
 {
     [SerializeField] private GameObject counterTop;
-    [SerializeField] private ClearCounter SecondCounter;
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     private KitchenObject kitchenObject;
 
-
-    [SerializeField] private bool IsTesting;
     public void Interact(GameObject interactor)
     {
-        SpawnKitchenObject();
-    }
-
-    private void Update()
-    {
-        if (IsTesting && Input.GetKeyDown(KeyCode.T))
+        // Try to get the Player component from the interactor GameObject
+        Player player = interactor.GetComponent<Player>();
+        if (player != null)
         {
-            if (kitchenObject != null)
-            {
-                kitchenObject.SetClearCounter(SecondCounter);
-            }
+            SpawnKitchenObject(player);
         }
-
+        else
+        {
+            Debug.LogWarning("Interactor does not have a Player component.");
+        }
     }
 
-    private void SpawnKitchenObject()
+    private void SpawnKitchenObject(Player player)
     {
 
         if (kitchenObject == null)
         {
             GameObject kitchenObjectInstance = Instantiate(kitchenObjectSO.prefab, counterTop.transform);
             // Set the local position to zero to align it with the counter top
-            kitchenObjectInstance.GetComponent<KitchenObject>().SetClearCounter(this);
+            kitchenObjectInstance.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
 
         }
         else
         {
-            Debug.Log(kitchenObject.GetClearCounter());
+            if (!player.HasKitchenObject())
+                kitchenObject.SetKitchenObjectParent(player);
         }
     }
 
-    public GameObject GetKitchenObjectFollowNewCounter()
+
+    public GameObject GetKitchenObjectAttachPoint()
     {
         return counterTop;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
     }
 
     public KitchenObject GetKitchenObject()
@@ -53,10 +54,7 @@ public class ClearCounter : MonoBehaviour, IInteractable
         return kitchenObject;
     }
 
-    public void SetKitchenObject(KitchenObject kitchenObject)
-    {
-        this.kitchenObject = kitchenObject;
-    }
+    
 
     public bool HasKitchenObject()
     {

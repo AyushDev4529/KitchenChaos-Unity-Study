@@ -1,40 +1,30 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
-    // Other properties and methods related to KitchenObject can be added here
-    public ClearCounter clearCounter;
-
-    // Method to get the KitchenObjectSO
+    public IKitchenObjectParent kitchenObjectParent;
     public KitchenObjectSO GetKitchenObjectSO()
     {
         return kitchenObjectSO;
     }
 
-    // Method to set the ClearCounter
-    public void SetClearCounter(ClearCounter clearCounter)
+    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
     {
-        if (this.clearCounter != null)
+        if (this.kitchenObjectParent != null)
         {
-            this.clearCounter.ClearKitchenObject();
+            this.kitchenObjectParent.ClearKitchenObject();
         }
 
-        this.clearCounter = clearCounter;
-        // Check if the ClearCounter already has a KitchenObject
-        if (clearCounter.HasKitchenObject())
-        {
-            Debug.LogError("Counter already has a kitchen object!");
-        }
+        this.kitchenObjectParent = kitchenObjectParent;
 
-        this.clearCounter.SetKitchenObject(this);
-        gameObject.transform.parent = clearCounter.GetKitchenObjectFollowNewCounter().transform;
+        this.kitchenObjectParent.SetKitchenObject(this);
+        gameObject.transform.parent = kitchenObjectParent.GetKitchenObjectAttachPoint().transform;
         gameObject.transform.localPosition = Vector3.zero;
     }
 
-    // Method to get the ClearCounter
-    public ClearCounter GetClearCounter()
+    public IKitchenObjectParent GetKitchenObjectParent()
     {
-        return clearCounter;
+        return kitchenObjectParent;
     }
 }

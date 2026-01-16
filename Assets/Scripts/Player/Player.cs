@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
     //TODO : to be moved to separate player Interaction Script with IInteractable interface
     //TODO : generalize so selectedVisual can be any type of interactable object
@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameInput gameInput;
     [SerializeField] CharacterController characterController;
     [SerializeField] LayerMask interactableLayerMask;
+    [SerializeField] private GameObject kitchenObjectHoldPoint;
+    private KitchenObject kitchenObject;
 
     // Singleton instance
     public static Player Instance { get; private set; }
@@ -101,4 +103,28 @@ public class Player : MonoBehaviour
 
     }
 
+
+    public GameObject GetKitchenObjectAttachPoint()
+    {
+        return kitchenObjectHoldPoint;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
+    }
+    public void ClearKitchenObject()
+    {
+        kitchenObject = null;
+    }
 }
