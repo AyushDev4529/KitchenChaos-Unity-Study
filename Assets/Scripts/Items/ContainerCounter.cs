@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ContainerCounter : BaseCounter, IInteractable
@@ -7,12 +8,16 @@ public class ContainerCounter : BaseCounter, IInteractable
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     
 
+    public event EventHandler OnPlayerGrabbedObject;
+
     public override void Interact(GameObject interactor)
     {
         // Try to get the Player component from the interactor GameObject
         Player player = interactor.GetComponent<Player>();
         if (player != null)
         {
+            OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+
             SpawnKitchenObject(player);
         }
         else
